@@ -28,4 +28,5 @@ clean:
 
 # Remove all data files
 reset: clean
-	@rm -rf binds/data/**/*
+	@rm -rf binds/data/loki/* binds/data/mimir/* binds/data/tempo/*
+	@find binds/data/grafana/ -mindepth 1 -maxdepth 1 ! -name '.*' ! -name 'dashboards' -exec rm -rf {} +

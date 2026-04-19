@@ -49,9 +49,12 @@ binds/data/mimir/*
 binds/data/tempo/*
 
 !binds/data/grafana/.gitkeep
+!binds/data/grafana/dashboards/
 !binds/data/loki/.gitkeep
 !binds/data/mimir/.gitkeep
 !binds/data/tempo/.gitkeep
 
 binds/config/*
 !binds/config/*.base.yaml
+!binds/config/dashboards
+!binds/config/datasources
