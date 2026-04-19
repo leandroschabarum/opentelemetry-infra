@@ -1,0 +1,57 @@
+# Logs
+logs
+*.log
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# dotenv environment variables file
+.env
+
+# large media files
+*.mp4
+*.tiff
+*.avi
+*.flv
+*.mov
+*.wmv
+
+# Others
+/.idea
+/.vscode
+.cache/
+tags
+docs
+*.swap
+*.swp
+*.rdb
+*.db
+*.csv
+*.ini
+*.sys
+*.config
+*.conf
+*.cnf
+*.cfg
+*.cf
+*.tgz
+
+
+lgtm/data/grafana/*
+lgtm/data/loki/*
+lgtm/data/mimir/*
+lgtm/data/tempo/*
+
+!lgtm/data/grafana/.gitkeep
+!lgtm/data/loki/.gitkeep
+!lgtm/data/mimir/.gitkeep
+!lgtm/data/tempo/.gitkeep
+
+lgtm/config/*
+!lgtm/config/*.base.yaml
