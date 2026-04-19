@@ -1,5 +1,5 @@
 # -*- MakeFile -*-
-CONFIGS=binds/config/loki binds/config/tempo binds/config/mimir binds/config/collector
+CONFIGS=binds/config/loki binds/config/tempo binds/config/mimir binds/config/collector binds/config/fluent-bit
 ENV_FILE=.env
 
 .PHONY: env

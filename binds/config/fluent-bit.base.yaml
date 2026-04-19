@@ -1,0 +1,35 @@
+service:
+  flush: 60
+  log_level: info
+
+pipeline:
+  inputs:
+    - name: node_exporter_metrics
+      tag: node_metrics
+      scrape_interval: 12
+      path.procfs: /host/proc
+      path.sysfs: /host/sys
+      processors:
+        metrics:
+          - name: labels
+            upsert: job node_exporter
+          - name: labels
+            upsert: instance ${FLUENT_BIT_HOST_LABEL}
+  outputs:
+    # Send metrics to the Opentelemetry Collector
+    - name: opentelemetry
+      match: "node_metrics"
+      host: ${FLUENT_BIT_OUTPUT_HOST}
+      port: ${FLUENT_BIT_OUTPUT_PORT}
+      metrics_uri: /v1/metrics
+      log_response_payload: true
+      tls: off
+
+    # # Send metrics to Mimir using the Prometheus exporter
+    # - name: prometheus_remote_write
+    #   match: "node_metrics"
+    #   host: ${FLUENT_BIT_OUTPUT_HOST}
+    #   port: ${FLUENT_BIT_OUTPUT_PORT}
+    #   uri: /api/v1/push
+    #   log_response_payload: true
+    #   tls: off

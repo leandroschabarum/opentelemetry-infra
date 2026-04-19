@@ -1,4 +1,18 @@
 services:
+  fluent-bit:
+    image: fluent/fluent-bit:5.0
+    container_name: fluent-bit
+    command: ["-c", "/etc/fluent-bit.yaml"]
+    network_mode: "host"
+    pid: "host"
+    volumes:
+      - ${FLUENT_BIT_CONFIG:-./binds/config/fluent-bit.yaml}:/etc/fluent-bit.yaml:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /mnt/data:/mnt/data:ro
+    depends_on:
+      - collector
+
   collector:
     image: otel/opentelemetry-collector:0.135.0
     container_name: collector
