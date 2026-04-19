@@ -34,6 +34,7 @@ services:
     user: root
     volumes:
       - ./binds/config/datasources:/etc/grafana/provisioning/datasources
+      - ./binds/config/dashboards:/etc/grafana/provisioning/dashboards
       - ${GRAFANA_DATA:-./binds/data/grafana}:/var/lib/grafana
     ports:
       - "127.0.0.1:3000:3000"
