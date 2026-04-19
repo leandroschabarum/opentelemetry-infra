@@ -43,15 +43,15 @@ docs
 *.tgz
 
 
-lgtm/data/grafana/*
-lgtm/data/loki/*
-lgtm/data/mimir/*
-lgtm/data/tempo/*
+binds/data/grafana/*
+binds/data/loki/*
+binds/data/mimir/*
+binds/data/tempo/*
 
-!lgtm/data/grafana/.gitkeep
-!lgtm/data/loki/.gitkeep
-!lgtm/data/mimir/.gitkeep
-!lgtm/data/tempo/.gitkeep
+!binds/data/grafana/.gitkeep
+!binds/data/loki/.gitkeep
+!binds/data/mimir/.gitkeep
+!binds/data/tempo/.gitkeep
 
-lgtm/config/*
-!lgtm/config/*.base.yaml
+binds/config/*
+!binds/config/*.base.yaml
