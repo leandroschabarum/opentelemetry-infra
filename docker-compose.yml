@@ -20,10 +20,11 @@ services:
     volumes:
       - ${COLLECTOR_CONFIG:-./binds/config/collector.yaml}:/etc/collector.yaml:ro
     ports:
-      - "127.0.0.1:55679:55679" # OTLP zPages
-      - "127.0.0.1:4317:4317"   # OTLP gRPC ingest
-      - "127.0.0.1:4318:4318"   # OTLP HTTP ingest
-      - "127.0.0.1:1514:1514"   # OTLP HTTP syslog ingest
+      - "127.0.0.1:55679:55679"   # OTLP zPages
+      - "127.0.0.1:4317:4317"     # OTLP gRPC ingest
+      - "127.0.0.1:4318:4318"     # OTLP HTTP ingest
+      - "127.0.0.1:1514:1514/tcp" # OTLP TCP syslog ingest
+      - "127.0.0.1:1514:1514/udp" # OTLP UDP syslog ingest
     depends_on:
       - mimir
       - tempo
