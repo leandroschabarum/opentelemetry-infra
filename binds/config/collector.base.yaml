@@ -5,6 +5,10 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
+  syslog:
+    tcp:
+      listen_address: 0.0.0.0:1514
+    protocol: rfc5424
 
 exporters:
   prometheusremotewrite:
@@ -38,6 +42,6 @@ service:
       exporters: [otlphttp/tempo]
 
     logs:
-      receivers: [otlp]
+      receivers: [otlp, syslog]
       processors: [memory_limiter, batch]
       exporters: [otlphttp/loki]
