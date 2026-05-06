@@ -17,8 +17,8 @@ receivers:
     protocol: rfc5424
 
 exporters:
-  prometheusremotewrite:
-    endpoint: http://mimir:8080/api/v1/push
+  otlphttp/mimir:
+    endpoint: http://mimir:8080/otlp
 
   otlphttp/tempo:
     endpoint: http://tempo:4318
@@ -40,7 +40,7 @@ service:
     metrics:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [prometheusremotewrite]
+      exporters: [otlphttp/mimir]
 
     traces:
       receivers: [otlp, jaeger]
