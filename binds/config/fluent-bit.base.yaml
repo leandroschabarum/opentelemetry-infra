@@ -5,7 +5,7 @@ service:
 pipeline:
   inputs:
     - name: forward
-      tag: logs
+      tag: "*"
       listen: 0.0.0.0
       port: 24224
     - name: node_exporter_metrics
@@ -22,9 +22,10 @@ pipeline:
   outputs:
     # Send forwarded logs to the Opentelemetry Collector
     - name: opentelemetry
-      match: "logs"
+      match: "*"
       host: ${FLUENT_BIT_OUTPUT_HOST}
       port: ${FLUENT_BIT_OUTPUT_PORT}
+      add_label: service.name ${TAG}
       logs_uri: /v1/logs
       log_response_payload: true
       tls: off
