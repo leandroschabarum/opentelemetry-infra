@@ -1,5 +1,5 @@
 service:
-  flush: 5 # 60 in prod
+  flush: 30
   log_level: info
 
 pipeline:
