@@ -1,9 +1,21 @@
 service:
-  flush: 60
+  flush: 5 # 60 in prod
   log_level: info
 
 pipeline:
   inputs:
+    - name: forward
+      tag: "*"
+      listen: 0.0.0.0
+      port: 24224
+      processors:
+        logs:
+          - name: opentelemetry_envelope
+          - name: content_modifier
+            context: otel_resource_attributes
+            action: upsert
+            key: service.name
+            value: unknown
     - name: node_exporter_metrics
       tag: node_metrics
       scrape_interval: 12
@@ -16,7 +28,15 @@ pipeline:
           - name: labels
             upsert: instance ${FLUENT_BIT_HOST_LABEL}
   outputs:
-    # Send metrics to the Opentelemetry Collector
+    # Send forwarded logs to the Opentelemetry Collector
+    - name: opentelemetry
+      match: "*"
+      host: ${FLUENT_BIT_OUTPUT_HOST}
+      port: ${FLUENT_BIT_OUTPUT_PORT}
+      logs_uri: /v1/logs
+      log_response_payload: true
+      tls: off
+    # Send host metrics to the Opentelemetry Collector
     - name: opentelemetry
       match: "node_metrics"
       host: ${FLUENT_BIT_OUTPUT_HOST}
